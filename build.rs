@@ -350,17 +350,11 @@ fn get_library_link_name(version: &PythonVersion, ld_version: &str) -> String {
 #[cfg(not(target_os = "macos"))]
 #[cfg(not(target_os = "windows"))]
 fn get_rustc_link_lib(config: &InterpreterConfig) -> Result<String, String> {
-    if config.shared {
-        Ok(format!(
-            "cargo:rustc-link-lib={}",
-            get_library_link_name(&config.version, &config.ld_version)
-        ))
-    } else {
         Ok(format!(
             "cargo:rustc-link-lib=static={}",
             get_library_link_name(&config.version, &config.ld_version)
         ))
-    }
+
 }
 
 #[cfg(target_os = "macos")]
