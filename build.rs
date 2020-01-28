@@ -492,7 +492,11 @@ fn configure(interpreter_config: &InterpreterConfig) -> Result<String, String> {
 
     let is_extension_module = env::var_os("CARGO_FEATURE_EXTENSION_MODULE").is_some();
     if !is_extension_module || cfg!(target_os = "windows") {
-        println!("{}", get_rustc_link_lib(&interpreter_config).unwrap());
+        let a = Ok(format!(
+            "cargo:rustc-link-lib=static={}",
+            get_library_link_name(&config.version, &config.ld_version)
+        ));
+        println!("{}", a.unwrap());
         if let Some(libdir) = &interpreter_config.libdir {
             println!("cargo:rustc-link-search=native={}", libdir);
         } else if cfg!(target_os = "windows") {
