@@ -198,7 +198,7 @@ fn load_cross_compile_info() -> Result<(InterpreterConfig, HashMap<String, Strin
     let intepreter_config = InterpreterConfig {
         version: python_version,
         libdir: Some(env::var("PYO3_CROSS_LIB_DIR").expect("PYO3_CROSS_LIB_DIR is not set")),
-        shared,
+        shared: false,
         ld_version: "".to_string(),
         base_prefix: "".to_string(),
         executable: "".to_string(),
